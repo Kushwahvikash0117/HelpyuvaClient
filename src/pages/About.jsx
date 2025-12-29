@@ -5,7 +5,7 @@ import logo from "../assets/Help.png";
 
 const About = () => {
   return (
-    <div className="bg-[#C9E3E0] text-[#2E5658] font-['Inter'] min-h-screen flex flex-col">
+    <div className="bg-[#C9E3E0] text-[#2E5658] min-h-screen flex flex-col">
 
       <section className="flex flex-col md:flex-row items-center justify-center px-6 sm:px-12 py-16 bg-[#E9F3F2] flex-grow">
         <div className="md:w-1/2 mb-10 md:mb-0">
