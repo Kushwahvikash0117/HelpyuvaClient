@@ -1,15 +1,22 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import logo from "../assets/Help.png";
 import { HiMenu, HiX } from "react-icons/hi";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-
   const toggleMenu = () => setIsOpen(!isOpen);
+
+  const linkClass = ({ isActive }) =>
+    `hover:text-[#2E5658] transition-all ${
+      isActive
+        ? "text-[#2E5658] border-b-2 border-[#2E5658]"
+        : "text-[#3D7072]"
+    }`;
 
   return (
     <header className="flex justify-between items-center px-6 sm:px-12 py-4 bg-white shadow-md sticky top-0 z-50">
+      
       {/* Logo */}
       <div className="flex items-center space-x-3">
         <img
@@ -23,20 +30,20 @@ const Navbar = () => {
       </div>
 
       {/* Desktop Menu */}
-      <nav className="hidden md:flex space-x-6 text-[#3D7072] font-medium">
-        <Link to="/" className="hover:text-[#2E5658]">
+      <nav className="hidden md:flex space-x-6 font-medium">
+        <NavLink to="/" end className={linkClass}>
           Home
-        </Link>
-        <Link to="/about" className="hover:text-[#2E5658]">
+        </NavLink>
+        <NavLink to="/about" className={linkClass}>
           About
-        </Link>
-        <a href="#impact" className="hover:text-[#2E5658]">
+        </NavLink>
+        <NavLink to="/impact" className={linkClass}>
           Impact
-        </a>
-        <a href="#join" className="hover:text-[#2E5658]">
+        </NavLink>
+        <NavLink to="/join-us" className={linkClass}>
           Join Us
-        </a>
-        <a href="#contact" className="hover:text-[#2E5658]">
+        </NavLink>
+        <a href="#contact" className="text-[#3D7072] hover:text-[#2E5658]">
           Contact
         </a>
       </nav>
@@ -48,41 +55,42 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Mobile Menu Dropdown */}
+      {/* Mobile Menu */}
       {isOpen && (
         <div className="absolute top-full left-0 w-full bg-white shadow-md flex flex-col items-center md:hidden py-4 space-y-4 z-40">
-          <Link
+          <NavLink
             to="/"
+            end
             onClick={toggleMenu}
-            className="hover:text-[#2E5658] text-lg font-medium"
+            className={linkClass}
           >
             Home
-          </Link>
-          <Link
+          </NavLink>
+          <NavLink
             to="/about"
             onClick={toggleMenu}
-            className="hover:text-[#2E5658] text-lg font-medium"
+            className={linkClass}
           >
             About
-          </Link>
-          <a
-            href="#impact"
+          </NavLink>
+          <NavLink
+            to="/impact"
             onClick={toggleMenu}
-            className="hover:text-[#2E5658] text-lg font-medium"
+            className={linkClass}
           >
             Impact
-          </a>
-          <a
-            href="#join"
+          </NavLink>
+          <NavLink
+            to="/join-us"
             onClick={toggleMenu}
-            className="hover:text-[#2E5658] text-lg font-medium"
+            className={linkClass}
           >
             Join Us
-          </a>
+          </NavLink>
           <a
             href="#contact"
             onClick={toggleMenu}
-            className="hover:text-[#2E5658] text-lg font-medium"
+            className="text-[#3D7072] hover:text-[#2E5658] text-lg font-medium"
           >
             Contact
           </a>
