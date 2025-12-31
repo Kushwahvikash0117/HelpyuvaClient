@@ -5,18 +5,16 @@ import { HiMenu, HiX } from "react-icons/hi";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const toggleMenu = () => setIsOpen(!isOpen);
 
   const linkClass = ({ isActive }) =>
-    `hover:text-[#2E5658] transition-all ${
+    `px-1 transition-all ${
       isActive
         ? "text-[#2E5658] border-b-2 border-[#2E5658]"
-        : "text-[#3D7072]"
+        : "text-[#3D7072] hover:text-[#2E5658]"
     }`;
 
   return (
     <header className="flex justify-between items-center px-6 sm:px-12 py-4 bg-white shadow-md sticky top-0 z-50">
-      
       {/* Logo */}
       <div className="flex items-center space-x-3">
         <img
@@ -31,69 +29,39 @@ const Navbar = () => {
 
       {/* Desktop Menu */}
       <nav className="hidden md:flex space-x-6 font-medium">
-        <NavLink to="/" end className={linkClass}>
-          Home
-        </NavLink>
-        <NavLink to="/about" className={linkClass}>
-          About
-        </NavLink>
-        <NavLink to="/impact" className={linkClass}>
-          Impact
-        </NavLink>
-        <NavLink to="/join-us" className={linkClass}>
-          Join Us
-        </NavLink>
-        <a href="#contact" className="text-[#3D7072] hover:text-[#2E5658]">
-          Contact
-        </a>
+        <NavLink to="/" end className={linkClass}>Home</NavLink>
+        <NavLink to="/about" className={linkClass}>About</NavLink>
+        <NavLink to="/impact" className={linkClass}>Impact</NavLink>
+        <NavLink to="/join-us" className={linkClass}>Join Us</NavLink>
+        <NavLink to="/contact" className={linkClass}>Contact</NavLink>
       </nav>
 
-      {/* Mobile Menu Button */}
-      <div className="md:hidden">
-        <button onClick={toggleMenu} className="text-3xl text-[#3D7072]">
-          {isOpen ? <HiX /> : <HiMenu />}
-        </button>
-      </div>
+      {/* Mobile Button */}
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="md:hidden text-3xl text-[#3D7072]"
+      >
+        {isOpen ? <HiX /> : <HiMenu />}
+      </button>
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="absolute top-full left-0 w-full bg-white shadow-md flex flex-col items-center md:hidden py-4 space-y-4 z-40">
-          <NavLink
-            to="/"
-            end
-            onClick={toggleMenu}
-            className={linkClass}
-          >
-            Home
-          </NavLink>
-          <NavLink
-            to="/about"
-            onClick={toggleMenu}
-            className={linkClass}
-          >
-            About
-          </NavLink>
-          <NavLink
-            to="/impact"
-            onClick={toggleMenu}
-            className={linkClass}
-          >
-            Impact
-          </NavLink>
-          <NavLink
-            to="/join-us"
-            onClick={toggleMenu}
-            className={linkClass}
-          >
-            Join Us
-          </NavLink>
-          <a
-            href="#contact"
-            onClick={toggleMenu}
-            className="text-[#3D7072] hover:text-[#2E5658] text-lg font-medium"
-          >
-            Contact
-          </a>
+        <div className="absolute top-full left-0 w-full bg-white shadow-md flex flex-col items-center py-6 space-y-4 md:hidden">
+          {["/", "/about", "/impact", "/join-us", "/contact"].map(
+            (path, i) => (
+              <NavLink
+                key={i}
+                to={path}
+                end={path === "/"}
+                onClick={() => setIsOpen(false)}
+                className={linkClass}
+              >
+                {path === "/"
+                  ? "Home"
+                  : path.replace("/", "").replace("-", " ")}
+              </NavLink>
+            )
+          )}
         </div>
       )}
     </header>
