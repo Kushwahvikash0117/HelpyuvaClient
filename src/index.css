@@ -1,1 +1,10 @@
+/* Google Fonts — MUST BE FIRST */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Poppins:wght@300;400;500;600&display=swap");
+
+/* Tailwind v4 */
 @import "tailwindcss";
+
+/* Global font */
+body {
+  font-family: "Poppins", system-ui, sans-serif;
+}
